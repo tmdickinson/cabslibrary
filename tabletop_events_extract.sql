@@ -5,7 +5,7 @@ SELECT 'Name'
 ,'Description'
 ,'BGG ID'
 ,'Is Play To Win'
--- ,'Publisher Name'
+,'Publisher Name'
 ,'Min Players'
 ,'Max Players'
 ,'Min Play Time'
@@ -39,12 +39,12 @@ ELSE cg.location
 END as 'Description',
 cg.bgg_id as 'BGG ID',
 '' as 'Is Play To Win',
--- bg.publisher as 'Publisher Name',
-bg.minplayers as 'Min Players',
-bg.maxplayers as 'Max Players',
-bg.playingtime as 'Min Play Time',
-bg.playingtime as 'Max Play Time',
-bg.minage as 'Age',
+bg.publisher as 'Publisher Name',
+CASE WHEN bg.minplayers = '' then '2' else bg.minplayers END as 'Min Players',
+CASE WHEN bg.maxplayers = '' then '4' else bg.maxplayers END as 'Max Players',
+CASE WHEN bg.playingtime = '' then '1' else bg.playingtime END as 'Min Play Time',
+CASE WHEN bg.playingtime = '' then '1' else bg.playingtime END as 'Max Play Time',
+CASE WHEN bg.minage = '' then '10' else bg.minage END as 'Age',
 '1' as 'Is In Circulation',
 '' as 'Overall Condition',
 '' as 'Missing Components',
@@ -56,7 +56,7 @@ LEFT JOIN bgg_games bg on cg.bgg_id = bg.bgg_id
 where cg.location not in 
 ('removed','gone','base','forsale','mia','kids')
 
-INTO OUTFILE 'tabletop_events_extract_6.csv'
+INTO OUTFILE 'tabletop_events_extract_5.csv'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
+LINES TERMINATED BY '\n';
