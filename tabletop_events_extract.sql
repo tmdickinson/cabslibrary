@@ -1,4 +1,3 @@
-
 use cabs;
 SELECT 'Name'
 ,'Catalog Number'
@@ -34,6 +33,9 @@ WHEN cg.location LIKE 'bc%' THEN CONCAT("Brown Crown"," ",RIGHT(cg.location,1))
 WHEN cg.location LIKE 'ps%' THEN CONCAT("Pink Star"," ",RIGHT(cg.location,1)) 
 WHEN cg.location LIKE 'op%' THEN CONCAT("Orange Padlock"," ",RIGHT(cg.location,1)) 
 WHEN cg.location LIKE 'tm%' THEN CONCAT("Turquoise Meeple"," ",RIGHT(cg.location,1)) 
+WHEN cg.location LIKE 'rp%' THEN CONCAT("Rainbow Puzzle"," ",RIGHT(cg.location,1)) 
+WHEN cg.location LIKE 'br%' THEN CONCAT("Black Rook"," ",RIGHT(cg.location,1)) 
+WHEN cg.location LIKE 'new' THEN 'Added Before Origins' 
 
 ELSE cg.location
 END as 'Description',
@@ -56,7 +58,7 @@ LEFT JOIN bgg_games bg on cg.bgg_id = bg.bgg_id
 where cg.location not in 
 ('removed','gone','base','forsale','mia','kids')
 
-INTO OUTFILE 'tabletop_events_extract_5.csv'
+INTO OUTFILE 'tabletop_events_origins_2022_2.csv'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';
